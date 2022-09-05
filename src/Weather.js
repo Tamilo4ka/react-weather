@@ -7,7 +7,6 @@ export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
   const [city, setCity] = useState(props.defaultCity);
   function handleResponse(response) {
-    console.log(response.data);
     setWeatherData({
       ready: true,
       temperature: response.data.main.temp,
@@ -19,8 +18,9 @@ export default function Weather(props) {
       city: response.data.name,
     });
   }
+
   function search() {
-    const apiKey = "9f0294a92b6eb81ed3250921cf34f28c";
+    const apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
     let apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
   }
@@ -33,6 +33,7 @@ export default function Weather(props) {
   function handleCityChange(event) {
     setCity(event.target.value);
   }
+
   if (weatherData.ready) {
     return (
       <div className="Weather">
@@ -41,7 +42,7 @@ export default function Weather(props) {
             <div className="col-9">
               <input
                 type="search"
-                placeholder="Enter a city..."
+                placeholder="Enter a city.."
                 className="form-control"
                 autoFocus="on"
                 onChange={handleCityChange}
